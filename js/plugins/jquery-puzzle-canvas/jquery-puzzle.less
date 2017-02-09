@@ -1,0 +1,30 @@
+.clearBoth{
+	&:before{
+			content: '';
+			display: block;
+			clear: both;
+		}
+		&:after{
+			content: '';
+			display: block;
+			clear: both;
+		}
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+.puzzleBox{
+	.clearBoth;
+	position: relative;
+	.puzzleItem{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.active{
+		box-shadow: 0 0 16px red;
+		// outline: 3px solid red;
+		z-index: 200!important;
+	}
+}

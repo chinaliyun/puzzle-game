@@ -1,0 +1,517 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+img {
+  border: none;
+}
+a {
+  text-decoration: none;
+}
+ul,
+li {
+  list-style: none;
+}
+.clearBoth:before {
+  content: '';
+  display: block;
+  clear: both;
+}
+.clearBoth:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.textOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+#index {
+  width: 100%;
+  height: 100%;
+  background-color: #ffd600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+}
+#index .index_baiyun01,
+#index .index_baiyun02,
+#index .index_baiyun03,
+#index .index_baiyun04 {
+  display: block;
+  width: 25%;
+  position: fixed;
+  z-index: 10;
+}
+#index .index_baiyun01 {
+  top: 5%;
+  left: 0;
+  animation: baiyun01 2s infinite 0s linear alternate;
+  -webkit-animation: baiyun01 2s infinite 0s linear alternate;
+}
+#index .index_baiyun02 {
+  top: 15%;
+  left: 80%;
+  animation: baiyun02 2.5s infinite 0.5s linear alternate;
+  -webkit-animation: baiyun02 2.5s infinite 0.5s linear alternate;
+}
+#index .index_baiyun03 {
+  top: 55%;
+  left: 10%;
+  animation: baiyun03 2.3s infinite 0s linear alternate;
+  -webkit-animation: baiyun03 2.3s infinite 0s linear alternate;
+}
+#index .index_baiyun04 {
+  top: 75%;
+  left: 70%;
+  animation: baiyun04 2.7s infinite 1s linear alternate;
+  -webkit-animation: baiyun04 2.7s infinite 1s linear alternate;
+}
+@keyframes baiyun01 {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 10%;
+  }
+}
+@-webkit-keyframes baiyun01 {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 10%;
+  }
+}
+@keyframes baiyun02 {
+  0% {
+    left: 80%;
+  }
+  100% {
+    left: 90%;
+  }
+}
+@-webkit-keyframes baiyun02 {
+  0% {
+    left: 80%;
+  }
+  100% {
+    left: 90%;
+  }
+}
+@keyframes baiyun03 {
+  0% {
+    left: 10%;
+  }
+  100% {
+    left: 30%;
+  }
+}
+@-webkit-keyframes baiyun03 {
+  0% {
+    left: 10%;
+  }
+  100% {
+    left: 30%;
+  }
+}
+@keyframes baiyun04 {
+  0% {
+    left: 70%;
+  }
+  100% {
+    left: 80%;
+  }
+}
+@-webkit-keyframes baiyun04 {
+  0% {
+    left: 70%;
+  }
+  100% {
+    left: 80%;
+  }
+}
+#index .index_logo {
+  position: fixed;
+  top: 5%;
+  left: 0;
+  z-index: 20;
+}
+#index .index_logo img {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+}
+#index .index_diffculty {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  padding-top: 30px;
+  background: url(../images/index__sectorbg.png) no-repeat 70% top;
+}
+#index .index_diffculty a {
+  display: block;
+  width: 70%;
+  margin: 0 auto;
+}
+#index .index_diffculty a img {
+  display: block;
+  width: 100%;
+}
+#player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 94;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+#player .blank {
+  height: 30%;
+}
+#player .main {
+  width: 80%;
+  margin: 0 auto;
+  background: url(../images/name_input_bg.png) no-repeat center top;
+  background-size: 100% auto;
+  height: 300px;
+}
+#player .main li:before {
+  content: '';
+  display: block;
+  clear: both;
+}
+#player .main li:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+#player .main input {
+  display: block;
+  float: right;
+  width: 48%;
+  padding: 0.5rem;
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #000000;
+}
+#player .main input.error {
+  border-color: #ff0000;
+}
+#player .main .username {
+  display: block;
+  float: right;
+  width: 49%;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  text-align: center;
+  color: black;
+  border: 2px solid white;
+  background: linear-gradient(left top, #fcdb6f, #fdbf2f);
+  background: -webkit-linear-gradient(left top, #fcdb6f, #fdbf2f);
+  background: -ms-linear-gradient(left top, #fcdb6f, #fdbf2f);
+  background: -o-linear-gradient(left top, #fcdb6f, #fdbf2f);
+}
+#loading {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: white;
+}
+#loading img.logo {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+#loading .barBox {
+  width: 50%;
+  height: 10px;
+  margin: 0 auto;
+  position: relative;
+}
+#loading .barBox .progressBar {
+  width: 100%;
+  height: 100%;
+  background-color: #444a4d;
+  position: relative;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  overflow: hidden;
+}
+#loading .barBox .progressBar span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: url('../images/loading_porogress_spanbg.jpg');
+  background-size: auto 100%;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  z-index: 2;
+}
+#loading .barBox img {
+  position: absolute;
+  top: -40px;
+  display: block;
+  width: 30px;
+  height: 40px;
+}
+#loading .barBox .loading_progress_left {
+  left: -15px;
+  z-index: 4;
+}
+#loading .barBox .loading_progress_right {
+  right: -15px;
+  z-index: 3;
+}
+#maincopy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 93;
+}
+#maincopy .title {
+  display: block;
+  width: 80%;
+  margin: 2rem auto;
+}
+#maincopy .img {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  border: 3px solid #392a28;
+}
+#activity {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 100%;
+  height: 100%;
+  background: url('../images/activity_bg.jpg');
+  background-size: 100% 100%;
+}
+#activity .timer:before {
+  content: '';
+  display: block;
+  clear: both;
+}
+#activity .timer:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+#activity .timer div {
+  float: right;
+  font-size: 2rem;
+  text-align: right;
+  color: #b40912;
+  padding: 0.5rem 1rem 1rem 1rem;
+  background: url('../images/activity_timerbg.png') no-repeat 0 3rem;
+  background-size: 100% auto;
+}
+#activity .title {
+  display: block;
+  width: 80%;
+  margin: 2rem auto;
+}
+#activity .main {
+  width: 80%;
+  margin: 0 auto;
+  border: 3px solid #392a28;
+}
+#activity #beginBtn {
+  width: 80%;
+  margin: 1rem auto;
+  height: 3rem;
+  border: 3px solid #392a28;
+  line-height: 3rem;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1rem;
+}
+#activity #beginBtn img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.8rem;
+  height: 50%;
+}
+#activity #beginBtn.showNum {
+  animation: myfirst 1s;
+  -webkit-animation: myfirst 1s;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+@keyframes myfirst {
+  0% {
+    font-size: 1rem;
+  }
+  50% {
+    font-size: 2rem;
+  }
+  100% {
+    font-size: 1rem;
+  }
+}
+@-webkit-keyframes myfirst {
+  0% {
+    font-size: 1rem;
+  }
+  50% {
+    font-size: 2rem;
+  }
+  100% {
+    font-size: 1rem;
+  }
+}
+#share {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 110;
+  background-color: black;
+}
+#share .resultbg {
+  position: relative;
+  width: 100%;
+  height: 70%;
+}
+#share .resultbg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#share .resultbg .grade {
+  position: absolute;
+  top: 1%;
+  left: 0;
+  width: 100%;
+}
+#share .resultbg .grade .content {
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  line-height: 2.5rem;
+}
+#share .btnbox {
+  position: absolute;
+  bottom: 0%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+}
+#share .btnbox .again {
+  display: block;
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  color: #ffd600;
+  border: 2px solid #ffd600;
+  background-color: black;
+  font-size: 1rem;
+  line-height: 2.5rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+#share .btnbox .share {
+  display: block;
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 2.5rem;
+  margin-top: 1rem;
+  color: #ffd600;
+  border-radius: 4px;
+  border: 2px solid black;
+  background-color: black;
+}
+#recive {
+  width: 100%;
+  height: 100%;
+  background: url('../images/share_bg.jpg') no-repeat top center #ffd600;
+  background-size: 100% 100%;
+  position: relative;
+}
+#recive .main {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+#recive .main p {
+  font-weight: bolder;
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+#recive .main p img {
+  width: 20%;
+}
+#recive .main p .time {
+  font-size: 1.5rem;
+  color: #b40912;
+  font-weight: bolder;
+}
+#recive .playBtn {
+  position: absolute;
+  top: 53%;
+  left: 0;
+  width: 100%;
+}
+#recive .playBtn a {
+  float: left;
+  margin-left: 50%;
+  width: 50%;
+}
+#recive .playBtn a img {
+  display: block;
+  width: 100%;
+}
+#recive .wechat {
+  position: absolute;
+  bottom: 3%;
+  left: 0;
+  width: 100%;
+}
+#recive .wechat > div {
+  width: 50%;
+  float: left;
+  margin-left: 30%;
+}
+#recive .wechat > div img {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+#recive .wechat > div p {
+  margin-bottom: 5%;
+  margin-top: 1%;
+  text-align: center;
+}

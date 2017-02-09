@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>“CAO疯神榜”拼图游戏</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=no">
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/main.css?456156">
+	<script type="text/javascript" src="js/wechatShare.js"></script>
+	<script type="text/javascript">
+		console.log(sessionStorage.lastname);
+		var url = decodeURIComponent(location.href);
+		// console.log(url);
+		var userPlayer = url.slice(url.indexOf('player=')).slice(7).indexOf('&') < 0
+			? url.slice(url.indexOf('player=')).slice(7)
+			: url.slice(url.indexOf('player=')).slice(7,url.slice(url.indexOf('player=')).indexOf('&'));
+		var userGrade = url.slice(url.indexOf('grade=')).slice(6).indexOf('&') < 0
+			? url.slice(url.indexOf('grade=')).slice(6)
+			: url.slice(url.indexOf('grade=')).slice(6,url.slice(url.indexOf('grade=')).indexOf('&'));
+		var userBegin = url.slice(url.indexOf('begin=')).slice(6).indexOf('&') < 0
+			? url.slice(url.indexOf('begin=')).slice(6)
+			: url.slice(url.indexOf('begin=')).slice(6,url.slice(url.indexOf('begin=')).indexOf('&'));
+		var userName = url.slice(url.indexOf('name=')).slice(5).indexOf('&') < 0
+			? url.slice(url.indexOf('name=')).slice(5)
+			: url.slice(url.indexOf('name=')).slice(5,url.slice(url.indexOf('name=')).indexOf('&'));
+		var userDiffCulty = url.slice(url.indexOf('diffculty=')).slice(10).indexOf('&') < 0
+			? url.slice(url.indexOf('diffculty=')).slice(10)
+			: url.slice(url.indexOf('diffculty=')).slice(10,url.slice(url.indexOf('diffculty=')).indexOf('&'));
+		var userLevel = url.slice(url.indexOf('level=')).slice(6).indexOf('&') < 0
+			? url.slice(url.indexOf('level=')).slice(6)
+			: url.slice(url.indexOf('level=')).slice(6,url.slice(url.indexOf('level=')).indexOf('&'));
+		$(function(){
+			var curLevel;
+			if(userLevel == 1){
+				curLevel = '初级'
+			}else if(userLevel == 2){
+				curLevel = '中级'
+			}else if (userLevel == 3){
+				curLevel = '高级'
+			}
+			console.log(userLevel);
+			// console.log(userPlayer,userGrade);
+			$('#share').find('img').attr('src','images/grade0'+ userName +'.jpg');
+			$('#share').find('.name').text(userPlayer);
+			$('#share').find('.timer').text(userGrade);
+			$('#share').find('.diffcult').text(curLevel);
+			if(!sessionStorage.lastname){
+				location.href = 'recive.html?diffculty='+ userDiffCulty + '&player=' + userPlayer + '&grade='+ userGrade + '&name=' + userName + '&level=' + userLevel;
+			}
+			// 初始化页面宽度
+			if($(window).get(0).innerWidth > 1000){
+				$('.page').width(500);
+			}
+			// 再来一次游戏
+			$('#share').find('.again').click(function(){
+				location.href = 'index.html';
+			})
+			
+		})
+	</script>
+</head>
+<body>
+	<div style="display: none;">
+		<img src="images/wecharshare.jpg">
+	</div>
+	<div id="share" class="page">
+		<div class="resultbg">
+			<img src="images/grade01.jpg?256156">
+			<div class="grade">
+				<div class="content">
+					<span class="name"></span>--
+					<span class="timer">00:00:00</span>&nbsp;&nbsp;(&nbsp;<span class="diffcult"></span>&nbsp;)
+				</div>
+			</div>
+		</div>
+		<div class="btnbox">
+			<a class="again" href="javascript:;">再来一次</a>
+			<a class="share">快去分享给你的朋友吧 :-D</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

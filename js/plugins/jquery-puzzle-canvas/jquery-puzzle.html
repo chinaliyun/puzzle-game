@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拼图</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="jquery-puzzle.css">
+	<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+	<style type="text/css">
+		#activity{
+			width: 96%;
+			/*height: 300px;*/
+			margin: 0 auto;
+			/*border:  1px solid red;*/
+		}
+		#loading{
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 200;
+			width: 100%;
+			height: 100%;
+			background: red;
+		}
+		#begin{
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 190;
+			width: 100%;
+			height: 100%;
+			/*background: green;*/
+		}
+		#begin button{
+			padding: 15px 30px;
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="loading"></div>
+	<div id="begin">
+		<div style="height: 200px;"></div>
+		<button>开始</button>
+	</div>
+	<div id="activity">
+
+	</div>
+
+	<script type="text/javascript">
+		$(function(){
+			
+
+			$('#activity').puzzle({
+				url: 'images/00206962.jpg',
+				// width: 400,
+				// height: 400,
+				colLength: 3,
+				rowLength: 3,
+				jumpAllow: true
+			});
+			checkTime();
+			function checkTime(){
+				var timer = $('#activity').attr('data-timer');
+				$('#loading').animate({
+					'width': $(window).get(0).innerWidth*(1-timer)
+				})
+				if(timer < 1){
+					setTimeout(function(){
+						checkTime();
+					},1000)
+				}
+			}
+			$('#begin button').click(function(){
+				timerBegin();
+				$('#begin').fadeOut(1);
+			})
+
+			var time = 0;
+			function timerBegin(){
+				// console.log($('#activity').attr('puzzle-rusult'));
+				if($('#activity').attr('puzzle-result') == 'success'){
+					var aa = window.confirm('您的总共用了'+time.toFixed(2)+'秒，要再来一次吗？');
+					if(aa){
+						$('#activity').attr('puzzle-result','');
+						$('#activity').puzzle({
+							url: 'images/3555821.jpg',
+							// width: 400,
+							// height: 400,
+							colLength: 3,
+							rowLength: 3,
+							jumpAllow: true
+						});
+						time = 0;
+						setTimeout(function(){
+							timerBegin();
+						},1000);
+					}
+				}else{
+					time+=0.01;
+					// console.log(time.toFixed(2));
+					setTimeout(function(){
+						timerBegin();
+					},1);
+				}
+				
+			}
+			
+			// console.log(aa);
+
+		})
+
+	</script>
+	<script type="text/javascript" src="jquery-puzzle.js"></script>
+</body>
+</html>

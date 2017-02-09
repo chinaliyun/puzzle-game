@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>“CAO疯神榜”拼图游戏</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery-puzzle-canvas/jquery-puzzle.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/plugins/jquery-puzzle-canvas/jquery-puzzle.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css?489156411">
+    <script type="text/javascript" src="js/wechatShare.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+    <div style="display: none;">
+        <img src="images/wecharshare.jpg">
+    </div>
+    <div id="index" class="page">
+        <img class="index_baiyun01" src="images/index_baiyun01.png">
+        <img class="index_baiyun02" src="images/index_baiyun02.png">
+        <img class="index_baiyun03" src="images/index_baiyun03.png">
+        <img class="index_baiyun04" src="images/index_baiyun04.png">
+        <div class="index_logo">
+            <img src="images/index_logo.png">
+        </div>
+        <div class="index_diffculty">
+            <a class="primary" href="javascript:;">
+                <img src="images/index_btn_primary.png">
+            </a>
+            <a class="middle" href="javascript:;">
+                <img src="images/index_btn_middle.png">
+            </a>
+            <a class="high" href="javascript:;">
+                <img src="images/index_btn_high.png">
+            </a>
+        </div>
+    </div>
+    <div id="player" class="page">
+        <div class="blank"></div>
+        <ul class="main">
+            <li>
+                <input type="text" placeholder="请留下您的芳名" maxlength="5"></input>
+            </li>
+            <li><a class="username" href="javascript:;">确认</a></li>
+        </ul>
+    </div>
+    <div id="loading" class="page">
+        <img class="logo" src="images/loading_logo.jpg">
+        <div class="barBox">
+            <div class="progressBar">
+                <span></span>
+            </div>
+            <img class="loading_progress_left" src="images/loading_progress_left.png">
+            <img class="loading_progress_right" src="images/loading_progress_right.png">
+        </div>
+    </div>
+    <div id="maincopy" class="page">
+        <img class="title" src="images/activity_title.png">
+        <img class="img" src="">
+    </div>
+    <div id="activity" class="page">
+        <img class="title" src="images/activity_title.png">
+        <div class="main"></div>
+        <div id="beginBtn">
+            <img src="images/activity_beginBtn.png">
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(function() {
+        var url = location.href;
+        var userPlayer = '';
+        var userGrade = '';
+        var userName = '';
+        var userLevel = '';
+        var colLength = 3;
+        var index = $("#index");
+        var loading = $('#loading');
+        var beginBtn = $('#beginBtn');
+        var diffcultyNum = [5, 6, 7];
+        var imgTmpl = [
+            'images/activity/160601.jpg',
+            'images/activity/160504.jpg',
+            'images/activity/160503.jpg',
+            'images/activity/160502.jpg',
+            'images/activity/160501.jpg',
+            'images/activity/160404.jpg',
+            'images/activity/160403.jpg',
+            'images/activity/160402.jpg',
+            'images/activity/160401.jpg',
+            'images/activity/160304.jpg',
+            'images/activity/160303.jpg',
+            'images/activity/160302.jpg',
+            'images/activity/160301.jpg'
+        ]
+        var imgLength = imgTmpl.length;
+        console.log(imgLength);
+        // 设置难度
+        index.find('.primary').click(function() {
+            colLength = diffcultyNum[0];
+            userLevel = 1;
+            _setPuzzle();
+        })
+        index.find('.middle').click(function() {
+            colLength = diffcultyNum[1];
+            userLevel = 2;
+            _setPuzzle();
+        })
+        index.find('.high').click(function() {
+            colLength = diffcultyNum[2];
+            userLevel = 3;
+            _setPuzzle();
+        })
+
+        // 初始化页面宽度
+        if ($(window).get(0).innerWidth > 1000) {
+            $('.page').width(500);
+        }
+
+        function _setPuzzle() {
+            setTimeout(function() {
+                index.fadeOut(1);
+                var imgIndex;
+                console.log(sessionStorage.firstname);
+                if (sessionStorage.firstname) {
+                    imgIndex = parseInt(imgLength * Math.random());
+                } else {
+                    imgIndex = 0;
+                }
+                console.log(imgIndex);
+
+                $('#maincopy').find('.img').attr('src', '' + imgTmpl[imgIndex]);
+
+                $('#activity .main').puzzle({
+                    url: imgTmpl[imgIndex],
+                    zIndex: 30,
+                    jumpAllow: true,
+                    colLength: colLength,
+                    rowLength: colLength
+                });
+                // 开始进度条
+                setBarPersent();
+            }, 500);
+        }
+
+
+
+
+        // 输入名字
+        $('#player').find('.username').click(function() {
+            var name = $('#player').find('input').val();
+            if (name) {
+                $('#player').fadeOut(100);
+                userPlayer = name;
+                // location.hash = location.hash + '&player=' + userPlayer;
+            } else {
+                $('#player').find('input').addClass('error');
+            }
+        })
+
+        // 设置进度条的具体内容
+        var beginTime;
+
+        function setBarPersent() {
+            var puzzleStatus = $('#activity .main').attr('data-timer');
+            var curLeft = loading.find('.loading_progress_left').css('left');
+            var barWidhth = loading.find('.progressBar').innerWidth();
+
+            // console.log(puzzleStatus,curLeft);
+            loading.find('.loading_progress_left').animate({
+                'left': barWidhth * puzzleStatus - 15
+            });
+            loading.find('span').animate({
+                'width': barWidhth * puzzleStatus
+            });
+            if (puzzleStatus < 1) {
+                setTimeout(function() {
+                    setBarPersent();
+                }, 500)
+            } else {
+                setTimeout(function() {
+                    loading.find('.loading_progress_left').attr('src', 'images/loading_progress_success.jpg')
+                    loading.find('.loading_progress_right').fadeOut(1);
+                }, 450)
+                setTimeout(function() {
+                    loading.fadeOut(300);
+                }, 800)
+            }
+        }
+        // 点击开始按钮
+        beginBtn.click(function() {
+            $(this).html('3').addClass('showNum')
+            setTimeout(function() {
+                beginBtn.html('2');
+            }, 1000);
+            setTimeout(function() {
+                beginBtn.html('1');
+            }, 2000);
+            setTimeout(function() {
+                beginBtn.removeClass('showNum').css({
+                    'font-size': '2rem'
+                });
+                $('#activity .main').attr('puzzle-disable', 'true');
+                $('#activity .main').attr('puzzle-result', 'error');
+                $('#maincopy').fadeOut(1);
+                setTimer();
+            }, 3000);
+        })
+
+        // 更新时间
+        var seconds = 0,
+            minute = 0,
+            millsec = 0;
+
+        function setTimer() {
+            var puzzleStatus = $('#activity .main').attr('puzzle-result');
+            var timer = beginBtn.html();
+            if (puzzleStatus == 'success') {
+                var duibi = new Array;
+
+                if (colLength == diffcultyNum[0]) {
+                    duibi = [30, 50, 100];
+                } else if (colLength == diffcultyNum[1]) {
+                    duibi = [60, 120, 240];
+                } else if (colLength == diffcultyNum[2]) {
+                    duibi = [100, 180, 360];
+                }
+
+                var dis = minute * 60 + seconds;
+                if (dis <= duibi[0]) {
+                    userName = '4';
+                } else if (dis > duibi[0] && dis <= duibi[1]) {
+                    userName = '3';
+                } else if (dis > duibi[1] && dis <= duibi[2]) {
+                    userName = '2';
+                } else if (dis > duibi[2]) {
+                    userName = '1';
+                }
+                sessionStorage.firstname = "1";
+                sessionStorage.lastname = "1";
+                // console.log(minute,seconds);
+                // setTimeout(function(){
+                location.href = 'share.html?begin=0&diffculty=' + colLength + '&player=' + userPlayer + '&grade=' + userGrade + '&name=' + userName + '&level=' + userLevel;
+                // },2000)
+                // $('#result').fadeIn(100);
+            }
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+            if (minute < 10) {
+                minute = '0' + minute;
+            }
+            if (millsec < 10) {
+                millsec = '00' + millsec;
+            } else if (millsec >= 10 && millsec < 100) {
+                millsec = '0' + millsec;
+            }
+            // console.log(minute,seconds,millsec);
+            var result = minute + ':' + seconds + ':' + millsec;
+            beginBtn.html(result);
+            userGrade = result;
+            seconds = parseInt(seconds);
+            minute = parseInt(minute);
+            millsec = parseInt(millsec);
+            if (millsec < 99) {
+                millsec++;
+            } else if (millsec > 98) {
+                seconds += 1;
+                millsec = 0;
+            }
+            if (seconds > 59) {
+                minute += 1;
+                seconds = 0;
+            }
+            if (puzzleStatus != 'success') {
+                setTimeout(function() {
+                    setTimer();
+                }, 10)
+            }
+
+        }
+    })
+    </script>
+</body>
+
+</html>

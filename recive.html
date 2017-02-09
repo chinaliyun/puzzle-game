@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>“CAO疯神榜”拼图游戏</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=no">
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/main.css?456156">
+	<script type="text/javascript" src="js/wechatShare.js"></script>
+</head>
+<body>
+	<div style="display: none;">
+		<img src="images/wecharshare.jpg">
+	</div>
+	<div id="recive" class="page">
+		<div class="main">
+			<p>"<span class="name"></span>"&nbsp;:&nbsp;&nbsp;<span class="player"></span>&nbsp;&nbsp;玩&nbsp;&nbsp;<img src="images/share_youxi.png"></p>
+			<p>用时&nbsp;<span class="time"></span>&nbsp;&nbsp;(<span class="diffcult"></span>)</p>
+		</div>
+		<div class="playBtn">
+			<a href="index.html"><img class="" src="images/share_play.png"></a>
+		</div>
+		<div class="wechat">
+			<div class="">
+				<img src="images/share_wechat_icon.jpg">
+				<p>更多好玩请关注CAO次元</p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			// 初始化页面宽度
+			if($(window).get(0).innerWidth > 1000){
+				$('body').width(500);
+			}
+			var url = decodeURIComponent(location.href);
+			console.log(url);
+			var userPlayer = url.slice(url.indexOf('player=')).slice(7).indexOf('&') < 0
+				? url.slice(url.indexOf('player=')).slice(7)
+				: url.slice(url.indexOf('player=')).slice(7,url.slice(url.indexOf('player=')).indexOf('&'));
+			var userGrade = url.slice(url.indexOf('grade=')).slice(6).indexOf('&') < 0
+				? url.slice(url.indexOf('grade=')).slice(6)
+				: url.slice(url.indexOf('grade=')).slice(6,url.slice(url.indexOf('grade=')).indexOf('&'));
+			var userBegin = url.slice(url.indexOf('begin=')).slice(6).indexOf('&') < 0
+				? url.slice(url.indexOf('begin=')).slice(6)
+				: url.slice(url.indexOf('begin=')).slice(6,url.slice(url.indexOf('begin=')).indexOf('&'));
+			var userName = url.slice(url.indexOf('name=')).slice(5).indexOf('&') < 0
+				? url.slice(url.indexOf('name=')).slice(5)
+				: url.slice(url.indexOf('name=')).slice(5,url.slice(url.indexOf('name=')).indexOf('&'));
+			var userDiffCulty = url.slice(url.indexOf('diffculty=')).slice(10).indexOf('&') < 0
+				? url.slice(url.indexOf('diffculty=')).slice(10)
+				: url.slice(url.indexOf('diffculty=')).slice(10,url.slice(url.indexOf('diffculty=')).indexOf('&'));
+			var userLevel = url.slice(url.indexOf('level=')).slice(6).indexOf('&') < 0
+				? url.slice(url.indexOf('level=')).slice(6)
+				: url.slice(url.indexOf('level=')).slice(6,url.slice(url.indexOf('level=')).indexOf('&'));
+			var curName;
+			var curLevel;
+			if(userName == 1){
+				curName = '渣宝';
+			}else if(userName == 2){
+				curName = '弱鸡';
+			}else if(userName == 3){
+				curName = '中二';
+			}else if(userName == 4){
+				curName = '大触';
+			}
+			if(userLevel == 1){
+				curLevel = '初级'
+			}else if(userLevel == 2){
+				curLevel = '中级'
+			}else if (userLevel == 3){
+				curLevel = '高级'
+			}
+			// console.log(curLevel);
+			$('#recive').find('.name').text(curName);
+			$('#recive').find('.player').text(userPlayer);
+			$('#recive').find('.time').text(userGrade);
+			$('#recive').find('.diffcult').text(curLevel);
+			
+		})
+	</script>
+</body>
+</html>
